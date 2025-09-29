@@ -41,8 +41,6 @@ public class EnfuserAPI {
     
     //;//  "&values=pollutants,meteorology,regional"; //components
     //add this to URL in case of testing API that supports request customization
-    protected static String USR = "lasse.johansson@fmi.fi";//add your user name here.
-    protected static String PWD = "BZnx2qrr1000";//add your password here.
     public static boolean TIME_LOG = true;
     public static void setVariableFilter(String[] pols) {
         if (pols==null) {
@@ -74,6 +72,8 @@ public class EnfuserAPI {
 
    public static void main(String[] args) {
        //1: get info from server
+       String USR ="";
+       String PWD = "";
        String token = AccessToken.fetchAccessToken(USR, PWD);
        AreaMeta am = getMeta(token);
        am.printout();
