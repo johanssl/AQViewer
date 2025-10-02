@@ -22,6 +22,11 @@ import static org.fmi.aq.enfuser.api.EnfuserAPI.URL_TOKEN;
  */
 public class AccessToken {
     
+    protected final static String ERR_MSG =  ("Could NOT fetch access token from "+URL_TOKEN
+                    +"!\n Check that your credentials (username and password) are correct."
+            + "\naIf you haven't registered for the service yet, do this at:\n"+URL_ACCOUNT);
+       
+    
      /**
     * Fetch access token from Enfuser point service API using your user name
     * and password.
@@ -71,8 +76,7 @@ public class AccessToken {
             return token;
            
         } catch (Exception e) {
-            System.out.println("Could NOT fetch access token from "+URL_TOKEN
-                    +"!\n Check that your credentials (username and password) are correct.\naIf you haven't registered for the service yet, do this at:\n"+URL_ACCOUNT);
+            System.out.println(ERR_MSG);
         }
         return null;
     } 

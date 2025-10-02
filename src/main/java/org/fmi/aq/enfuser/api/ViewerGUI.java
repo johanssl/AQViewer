@@ -233,6 +233,7 @@ public class ViewerGUI extends javax.swing.JFrame {
                 }
                 File f = new File(this.tempDir);
                 if (!f.exists()) f.mkdirs();
+                System.out.println("Directory for temporary files: "+ f.getAbsolutePath());
                 
                 
     }
@@ -276,6 +277,9 @@ public class ViewerGUI extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
+        jB_minusH = new javax.swing.JButton();
+        jB_plusH = new javax.swing.JButton();
+        jB_now = new javax.swing.JButton();
         JP_map = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -383,58 +387,83 @@ public class ViewerGUI extends javax.swing.JFrame {
             }
         });
 
+        jB_minusH.setText("-1h");
+        jB_minusH.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jB_minusHActionPerformed(evt);
+            }
+        });
+
+        jB_plusH.setText("+1h");
+        jB_plusH.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jB_plusHActionPerformed(evt);
+            }
+        });
+
+        jB_now.setText("Now");
+        jB_now.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jB_nowActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jB_fetchMeta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jT_pwd, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)
+                            .addComponent(jT_usr))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jB_fetchMeta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jT_pwd, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)
-                                    .addComponent(jT_usr))
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jL_cc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jC_areas, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jT_hoursForward, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jB_pointQ, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jB_geoQ, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jL_timeRange, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jL_gridCons, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jS_opac, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 81, Short.MAX_VALUE))
+                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jC_pointFormat, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jC_contentFilt, javax.swing.GroupLayout.Alignment.LEADING, 0, 145, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jT_box)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jT_time)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jB_plusH)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addComponent(jL_cc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jC_areas, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jT_hoursForward, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(jB_pointQ, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jB_geoQ, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jL_timeRange, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jL_gridCons, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jS_opac, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 77, Short.MAX_VALUE))
-                            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jC_pointFormat, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jC_contentFilt, javax.swing.GroupLayout.Alignment.LEADING, 0, 145, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jT_box)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
-                                    .addComponent(jT_time))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(jB_minusH, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jB_now, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -455,14 +484,19 @@ public class ViewerGUI extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel10)
                 .addGap(3, 3, 3)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jB_plusH)
+                    .addComponent(jB_minusH)
+                    .addComponent(jB_now))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jT_time, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jT_box, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel7)
                 .addGap(10, 10, 10)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -478,7 +512,7 @@ public class ViewerGUI extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jC_pointFormat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8))
-                .addGap(28, 28, 28)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jB_geoQ)
@@ -488,9 +522,9 @@ public class ViewerGUI extends javax.swing.JFrame {
                     .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
-                .addComponent(jButton2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 82, Short.MAX_VALUE)
                 .addComponent(jL_gridCons)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jL_timeRange)
@@ -503,7 +537,7 @@ public class ViewerGUI extends javax.swing.JFrame {
         JP_map.setLayout(JP_mapLayout);
         JP_mapLayout.setHorizontalGroup(
             JP_mapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 838, Short.MAX_VALUE)
+            .addGap(0, 929, Short.MAX_VALUE)
         );
         JP_mapLayout.setVerticalGroup(
             JP_mapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -561,9 +595,18 @@ public class ViewerGUI extends javax.swing.JFrame {
 
         am.printout();
         jC_areas.setSelectedIndex(0);
+      } else {
+          showCustomMessage(AccessToken.ERR_MSG,false);
       }
     }//GEN-LAST:event_jB_fetchMetaActionPerformed
 
+    private void showCustomMessage(String s, boolean sout) {
+        Point p = new Point(0,0);
+        GeoPosition geo = mapViewer.convertPointToGeoPosition(p);
+        this.showInfoBox(mapViewer, geo, s);
+        if (sout)System.out.println(s);
+    }
+    
     private void jC_areasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jC_areasActionPerformed
         if (this.am==null) return;
         String area = jC_areas.getSelectedItem().toString();
@@ -637,17 +680,19 @@ public class ViewerGUI extends javax.swing.JFrame {
 } 
     
     private void jB_geoQActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_geoQActionPerformed
-       if (this.leftClickPosition==null || this.rightClickPosition==null) {
-            System.out.println("Click on the map to choose the box first.");
-            return;
-        }
         if (this.am==null) {
-            System.out.println("List available data first.");
+            this.showCustomMessage("List available data first.",true);
             return;
         }
         
+        if (this.leftClickPosition==null || this.rightClickPosition==null) {
+            this.showCustomMessage("Click on the map to choose the box first."
+                    + "\n Left-click to set a corner, and then right-click for another.",true);
+            return;
+        }
+       
         if (jL_vars.getSelectedIndices()==null || jL_vars.getSelectedIndices().length==0) {
-            System.out.println("Select one or more variables first.");
+            this.showCustomMessage("Select one or more variables first.",true);
             return;
         }
         
@@ -719,14 +764,35 @@ public class ViewerGUI extends javax.swing.JFrame {
         overlay.showImageOnMap(fd.getBufferedImage(), grid.gridBounds,(float)alpha);
     }
     
+    private Dtime getTime(boolean returnIfOob) {
+        try {
+            String qstart = jT_time.getText();
+            Dtime dt = new Dtime(qstart.replace("Z", ""));
+            
+            if (this.start!=null && end!=null) {
+                if (dt.systemHours()< start.systemHours() || dt.systemHours()> end.systemHours()) {
+                    showCustomMessage("Selected time (start) is not within area data range:"
+                            +"\n"+start.getStringDate_noTS() +"Z to "+end.getStringDate_noTS()+"Z",true);
+                    if (returnIfOob)return dt;
+                    return null;
+                }
+            }
+            
+            return dt;
+        } catch (Exception e) {
+            showCustomMessage("Incorrect time format.\nUse YYYY-MM-ddThh:mm:ssZ\nFor example:'2025-01-01T00:00:00Z'",true);
+            return null;
+        }
+    }
+    
     private void jB_pointQActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_pointQActionPerformed
-
-        if (this.leftClickPosition==null) {
-            System.out.println("Left click on the map to choose location first.");
+        if (this.am==null) {
+            showCustomMessage("List available data first.",true);
             return;
         }
-        if (this.am==null) {
-            System.out.println("List available data first.");
+        
+        if (this.leftClickPosition==null) {
+            showCustomMessage("Left click on the map to choose location first.",true);
             return;
         }
 
@@ -750,13 +816,19 @@ public class ViewerGUI extends javax.swing.JFrame {
         double lat = this.leftClickPosition.getLatitude();
         double lon = this.leftClickPosition.getLongitude();
         String qstart = jT_time.getText();
-        Dtime dt = new Dtime(qstart.replace("Z", ""));
-
+        Dtime dt = getTime(false);
+        if (dt==null) return;
+        
         int hours = Integer.parseInt(jT_hoursForward.getText());
         dt.addSeconds(3600*hours);
         String qend = dt.getStringDate_noTS()+"Z";
 
         PointSequence resp = EnfuserAPI.fetchResponse(token, lat,lon, qstart, qend);
+        if (resp.failed) {
+            showCustomMessage(resp.warnings,false);
+            return;
+        }
+        
         
         int oi = jC_pointFormat.getSelectedIndex();
         if (oi<2) {
@@ -798,14 +870,39 @@ public class ViewerGUI extends javax.swing.JFrame {
        ConsoleControl.toggleConsole();
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void jB_nowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_nowActionPerformed
+      Dtime dt = Dtime.getSystemDate_FH();
+      jT_time.setText(dt.getStringDate_noTS()+"Z");
+    }//GEN-LAST:event_jB_nowActionPerformed
+
+    private void jB_plusHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_plusHActionPerformed
+       Dtime dt = this.getTime(true);
+       if (dt==null) return;
+       dt.addSeconds(3600);
+      jT_time.setText(dt.getStringDate_noTS()+"Z");
+    }//GEN-LAST:event_jB_plusHActionPerformed
+
+    private void jB_minusHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_minusHActionPerformed
+       Dtime dt = this.getTime(true);
+       if (dt==null) return;
+       dt.addSeconds(-3600);
+      jT_time.setText(dt.getStringDate_noTS()+"Z");
+    }//GEN-LAST:event_jB_minusHActionPerformed
+
     private String popupPointQuery(GeoPosition geo) {
         if (this.am==null) return null;
+        Dtime dt = this.getTime(false);
+        if (dt==null) return null;
         String qstart = jT_time.getText();
         EnfuserAPI.setGroupFilter(new String[]{GROUP_AP, EnfuserAPI.GROUP_MET});
         EnfuserAPI.setVariableFilter(null);
         double lat = geo.getLatitude();
         double lon = geo.getLongitude();
         PointSequence resp = EnfuserAPI.fetchResponse(token, lat, lon, qstart, null);
+        if (resp.failed) {
+            return resp.warnings;
+        }
+        
         return resp.shortInfo(qstart);
     }
     
@@ -829,6 +926,9 @@ public class ViewerGUI extends javax.swing.JFrame {
     private javax.swing.JPanel JP_map;
     private javax.swing.JButton jB_fetchMeta;
     private javax.swing.JButton jB_geoQ;
+    private javax.swing.JButton jB_minusH;
+    private javax.swing.JButton jB_now;
+    private javax.swing.JButton jB_plusH;
     private javax.swing.JButton jB_pointQ;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;

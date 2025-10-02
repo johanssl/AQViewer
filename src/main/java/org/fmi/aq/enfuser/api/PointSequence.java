@@ -60,7 +60,13 @@ import static org.fmi.aq.enfuser.ftools.FuserTools.editPrecision;
                 }
 
             } catch (Exception ex) {
-              ex.printStackTrace();
+              if (resp.contains("inside a building"))  {
+                 this.warnings = "Location is inside a building."; 
+              } else {
+                ex.printStackTrace(); 
+                this.warnings ="Point query failed.";
+              }
+              
               failed = true;
             }
             
