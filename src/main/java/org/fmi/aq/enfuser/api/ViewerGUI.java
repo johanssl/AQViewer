@@ -72,6 +72,7 @@ public class ViewerGUI extends javax.swing.JFrame {
     
     //meta 
     String token;
+    long tokenSecs = -1;
     AreaMeta am;
     Boundaries curr_b= null;//for current selected area
     Dtime start= null;//for current selected area's data availability
@@ -580,12 +581,26 @@ public class ViewerGUI extends javax.swing.JFrame {
         jT_box.setText(b.toText_fileFriendly(4).replace("_", ","));
     }
     
+    private void refreshToken() {
+        long t = System.currentTimeMillis();
+        long dff_min = (t-this.tokenSecs)/60000;
+        System.out.println("Token refreshed "+dff_min +"minutes ago.");
+        if (dff_min > 20) {
+            System.out.println("Refreshing token now.");
+            String usr = jT_usr.getText();
+            String pwd = jT_pwd.getText();
+            this.token = AccessToken.fetchAccessToken(usr, pwd);
+            tokenSecs = System.currentTimeMillis();
+        }
+    }
+    
     private void jB_fetchMetaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_fetchMetaActionPerformed
       String usr = jT_usr.getText();
       String pwd = jT_pwd.getText();
       this.token = AccessToken.fetchAccessToken(usr, pwd);
      
       if (token!=null) {
+        tokenSecs = System.currentTimeMillis();
         this.am = AreaMeta.getMeta(token); 
         String[] arNames = new String[am.areas.size()];
         for (int i =0;i<am.areas.size();i++) {
@@ -696,6 +711,8 @@ public class ViewerGUI extends javax.swing.JFrame {
             return;
         }
         
+        refreshToken();
+        
         EnfuserAPI.setGroupFilter(new String[]{GROUP_AP});
         List<String> varList = jL_vars.getSelectedValuesList();
         String[] vars = new String[varList.size()];
@@ -796,6 +813,8 @@ public class ViewerGUI extends javax.swing.JFrame {
             return;
         }
 
+        refreshToken();
+        
         if (jC_contentFilt.getSelectedIndex()==2) {
             EnfuserAPI.setGroupFilter(null);//all
         } else if (jC_contentFilt.getSelectedIndex()==1) {
@@ -893,6 +912,9 @@ public class ViewerGUI extends javax.swing.JFrame {
         if (this.am==null) return null;
         Dtime dt = this.getTime(false);
         if (dt==null) return null;
+        
+        refreshToken();
+        
         String qstart = jT_time.getText();
         EnfuserAPI.setGroupFilter(new String[]{GROUP_AP, EnfuserAPI.GROUP_MET});
         EnfuserAPI.setVariableFilter(null);
