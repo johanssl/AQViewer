@@ -4,6 +4,7 @@
  */
 package org.fmi.aq.enfuser.api;
 
+import java.io.File;
 import java.io.InputStream;
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 import static org.fmi.aq.enfuser.api.AreaMeta.getMeta;
 import org.fmi.aq.enfuser.ftools.EnfuserLogger;
 import org.fmi.aq.essentials.geoGrid.Boundaries;
+import org.fmi.aq.essentials.geoGrid.Dtime;
 
 /**
  *
@@ -243,7 +245,43 @@ public class EnfuserAPI {
             System.err.println("Failed to download file. HTTP status code: " + response.statusCode());
             return false;
         }
-}     
+}
+    
+    
+        public static File fetchRawZip(String token, double lat, double lon,
+                Dtime dt, String dir, String area) {
+        
+         try {
+            long t = System.currentTimeMillis();
+            String address = URLBASE+"rawdata?lat="+lat+"&lon="+lon +"&startTime="+dt.getStringDate_noTS()+"Z";
+            System.out.println("Opening connection to "+address);
+            HttpClient client = HttpClient.newHttpClient();
+            HttpRequest request = HttpRequest.newBuilder()
+            .GET()
+            .uri(new URI(address))
+            .header("Authorization","Bearer "+token)
+            .build();
+
+            HttpResponse<InputStream> response = client.send(request, HttpResponse.BodyHandlers.ofInputStream());
+
+            if (response.statusCode() == 200) {
+                String targetPath = dir + "hourlyBundle_"+area+"_"+dt.getStringDate_YYYY_MM_DDTHH()+".zip";
+                try (InputStream inputStream = response.body()) {
+                    Files.copy(inputStream, Path.of(targetPath), StandardCopyOption.REPLACE_EXISTING);
+                    long t2 = System.currentTimeMillis();
+                    System.out.println("File downloaded to: " + targetPath+ " (took "+(t2-t)/1000 +"s)");
+                    
+                    return new File(targetPath);
+                }
+            } else {
+                System.err.println("Failed to download file. HTTP status code: " + response.statusCode());
+                return null;
+            }
+        
+         } catch (Exception e) {
+             return null;
+         }
+} 
    
               
 }

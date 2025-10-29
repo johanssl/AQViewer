@@ -115,6 +115,7 @@
                               <Component id="jB_now" pref="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
+                      <Component id="jB_rawDown" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -186,7 +187,9 @@
                   <Component id="jButton1" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jButton2" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="82" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jB_rawDown" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="53" max="32767" attributes="0"/>
                   <Component id="jL_gridCons" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jL_timeRange" min="-2" max="-2" attributes="0"/>
@@ -435,6 +438,14 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jB_nowActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="jB_rawDown">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Download full hourly set"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jB_rawDownActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

@@ -281,6 +281,7 @@ public class ViewerGUI extends javax.swing.JFrame {
         jB_minusH = new javax.swing.JButton();
         jB_plusH = new javax.swing.JButton();
         jB_now = new javax.swing.JButton();
+        jB_rawDown = new javax.swing.JButton();
         JP_map = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -409,6 +410,13 @@ public class ViewerGUI extends javax.swing.JFrame {
             }
         });
 
+        jB_rawDown.setText("Download full hourly set");
+        jB_rawDown.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jB_rawDownActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -464,7 +472,8 @@ public class ViewerGUI extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jB_now, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE))))
+                            .addComponent(jB_now, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)))
+                    .addComponent(jB_rawDown, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -525,7 +534,9 @@ public class ViewerGUI extends javax.swing.JFrame {
                 .addComponent(jButton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 82, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jB_rawDown)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
                 .addComponent(jL_gridCons)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jL_timeRange)
@@ -908,6 +919,32 @@ public class ViewerGUI extends javax.swing.JFrame {
       jT_time.setText(dt.getStringDate_noTS()+"Z");
     }//GEN-LAST:event_jB_minusHActionPerformed
 
+    private void jB_rawDownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_rawDownActionPerformed
+        if (this.am==null) {
+            showCustomMessage("List available data first.",true);
+            return;
+        }
+        if (this.leftClickPosition==null) {
+            showCustomMessage("Left click on the map to choose location first.",true);
+            return;
+        }
+        refreshToken();
+
+        double lat = this.leftClickPosition.getLatitude();
+        double lon = this.leftClickPosition.getLongitude();
+        Dtime dt = getTime(false);
+        if (dt==null) return;
+        String area = jC_areas.getSelectedItem().toString();
+        File f = EnfuserAPI.fetchRawZip(token, lat, lon,dt, this.tempDir, area);
+        if (f !=null) {
+            try {
+                    Desktop.getDesktop().open(f);
+                } catch (IOException ex) {
+                    Logger.getLogger(ViewerGUI.class.getName()).log(Level.SEVERE, null, ex);
+                }
+        }
+    }//GEN-LAST:event_jB_rawDownActionPerformed
+
     private String popupPointQuery(GeoPosition geo) {
         if (this.am==null) return null;
         Dtime dt = this.getTime(false);
@@ -952,6 +989,7 @@ public class ViewerGUI extends javax.swing.JFrame {
     private javax.swing.JButton jB_now;
     private javax.swing.JButton jB_plusH;
     private javax.swing.JButton jB_pointQ;
+    private javax.swing.JButton jB_rawDown;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JComboBox<String> jC_areas;
