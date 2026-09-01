@@ -86,6 +86,8 @@ public class ViewerGUI extends javax.swing.JFrame {
     public ViewerGUI() {
         initComponents();
         
+
+        
                 // Setup tile factory (OpenStreetMap)
                 TileFactoryInfo info = new TileFactoryInfo(
                         0, MAX_ZOOM, MAX_ZOOM, 256, true, true,
@@ -102,11 +104,14 @@ public class ViewerGUI extends javax.swing.JFrame {
                         };
                 
                 DefaultTileFactory tileFactory = new DefaultTileFactory(info);
+                //
+                // Instantiate and bind your custom cache system to the factory
+                SaturationAdjustedTileCache customCache = new SaturationAdjustedTileCache((float)SATUR);
+                tileFactory.setTileCache(customCache);
                 
                 // Create map viewer
                 mapViewer = new JXMapViewer();
                 mapViewer.setTileFactory(tileFactory);
-                
                 
                 // Set initial focus
                 GeoPosition initLoc = new GeoPosition(60.2, 25.0);
@@ -238,6 +243,8 @@ public class ViewerGUI extends javax.swing.JFrame {
                 
                 
     }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -965,12 +972,19 @@ public class ViewerGUI extends javax.swing.JFrame {
         return resp.shortInfo(qstart);
     }
     
-    
+    public static double SATUR =1.0;
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        
+       
+        if (args!=null) {
+            for (String s:args) {
+                if (s.contains("saturation=")) {
+                    SATUR = Double.parseDouble(s.split("=")[1]);
+                }
+            }
+        }
         GuiFeel.set(null);
 
         /* Create and display the form */

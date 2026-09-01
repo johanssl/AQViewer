@@ -48,7 +48,7 @@
             <version>1.7.5</version>
             <scope>runtime</scope>
         </dependency>
-                <dependency>
+        <dependency>
             <groupId>jdesktop</groupId>
             <artifactId>jdesktop</artifactId>
             <version>1.0.3</version>
